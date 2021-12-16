@@ -57,7 +57,7 @@ class IRC:
     def disconnect(
         self, msg="Powered by https://github.com/cGIfl300/irc_client"
     ):
-        """Disconnect the botnic
+        """Disconnect the bot
         msg (string): Optionnal, the bot message
         """
         self.irc.send(bytes(f"QUIT {msg}\n", "UTF-8"))
