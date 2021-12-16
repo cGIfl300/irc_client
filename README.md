@@ -11,6 +11,10 @@ from irc import IRC
 irc = IRC("irc.swiftirc.net", "#FreshChat", "TestBOT938")
 irc.connect()
 ```  
+## Disconnect your bot
+```python
+irc.disconnect()
+```  
 
 # Copyright (C)
 
