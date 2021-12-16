@@ -1,5 +1,4 @@
 import socket
-import sys
 import time
 
 
@@ -24,10 +23,11 @@ class IRC:
         self.botnickpass = botnickpass
         self.first_ping = True
         self.has_joined = False
+        self.msg = ""
 
-    def send(self, msg):
-        # Transfer data
-        self.irc.send(bytes(f"PRIVMSG {self.channel} {msg}\n", "UTF-8"))
+    def send(self, msg="No message"):
+        # Send a message
+        self.irc.send(bytes(f"PRIVMSG {self.channel} :{msg}\n", "UTF-8"))
 
     def connect(self):
         # Connect to the server
@@ -47,9 +47,21 @@ class IRC:
                 bytes(f"NICKSERV IDENTIFY {self.botnickpass}\n", "UTF-8")
             )
 
+        time.sleep(5)
+        self.join()
+
     def join(self):
         # Join the channel
         self.irc.send(bytes(f"JOIN {self.channel}\n", "UTF-8"))
+
+    def disconnect(
+        self, msg="Powered by https://github.com/cGIfl300/irc_client"
+    ):
+        """Disconnect the botnic
+        msg (string): Optionnal, the bot message
+        """
+        self.irc.send(bytes(f"QUIT {msg}\n", "UTF-8"))
+        self.irc.close()
 
     def get_response(self):
         time.sleep(1)
