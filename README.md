@@ -1,5 +1,5 @@
 # An IRC Bot program to rules them all  
- I wrote this little software because I needed an IRC bot for chilling-coding,
+ I wrote this little software because I needed an IRC bot for #chilling-coding,
  here is the basic bot, you can extend or adapt to any need.  
  Enjoy!
 
