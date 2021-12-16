@@ -3,6 +3,17 @@
  here is the basic bot, you can extend or adapt to any need.  
  Enjoy!
 
+# Documentation  
+Here is the technical documentation, this is a pure python bot.  
+## Connect your bot  
+```python
+from irc import IRC
+irc = IRC("irc.swiftirc.net", "#FreshChat", "TestBOT938")
+irc.connect()
+```  
+
+# Copyright (C)
+
 Copyright (C) 2021  cGIfl300 <cgifl300@cgifl300.com>
 
 This program is free software: you can redistribute it and/or modify
