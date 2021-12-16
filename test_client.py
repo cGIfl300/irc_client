@@ -1,6 +1,4 @@
 from irc import IRC
-import os
-import random
 
 irc = IRC("irc.swiftirc.net", "#FreshChat", "TestBOT938")
 irc.connect()

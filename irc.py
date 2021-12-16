@@ -68,5 +68,6 @@ class IRC:
                     self.first_ping = False
                     return response
                 if not self.has_joined:
+                    # Only connect at the second ping, this delay prevent from been baned
                     self.join()
         return response
