@@ -4,11 +4,13 @@ import time
 
 class IRC:
     """A class to have an IRC Client
-    server (string): Server Name ("XXX.XXX.XXX.XXX") # Can be an IP or an hostname
+    server (string): Server Name ("XXX.XXX.XXX.XXX") # Can be an IP or an
+    hostname
     port (int): 6667 by default, the port to connect to
     channel (string): channel name must start by # or ! or &
     botnick (string): the bot's nickname
-    botnickpass (string): the bot's password, we use nickaserv, set to None if None
+    botnickpass (string): the bot's password, we use nickaserv, set to None if
+    None
     """
 
     irc = socket.socket()
@@ -37,7 +39,8 @@ class IRC:
         # Perform user authentication
         self.irc.send(
             bytes(
-                f"USER {self.botnick} {self.botnick} {self.botnick} :Hello From the World\n",
+                f"USER {self.botnick} {self.botnick} {self.botnick} :Hello"
+                " From the World\n",
                 "UTF-8",
             )
         )
@@ -80,6 +83,7 @@ class IRC:
                     self.first_ping = False
                     return response
                 if not self.has_joined:
-                    # Only connect at the second ping, this delay prevent from been baned
+                    # Only connect at the second ping, this delay prevent
+                    # from been baned
                     self.join()
         return response

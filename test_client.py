@@ -21,4 +21,5 @@ while not exit_trigger:
 
 # To test, send "hello" it should reply "Hello!"
 # Send nothing it shouldn't act
-# Send "disconnect" to disconnect the bot, it should have a default quit message
+# Send "disconnect" to disconnect the bot, it should have a default quit
+# message
