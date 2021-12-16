@@ -16,6 +16,54 @@ irc.connect()
 irc.disconnect()
 ```  
 
+## Interacting with PRIVMSG  
+Here is how to structure messages like:  
+```python
+{'headers': 'cGIfl301!~dragonfly@Swift-12B59164.w82-120.abo.wanadoo.fr PRIVMSG #HereIsTheTestChannel',
+'sender': 'cGIfl301!~dragonfly@Swift-12B59164.w82-120.abo.wanadoo.fr',
+'sender_nickname': 'cGIfl301',
+'sender_hostname': 'Swift-12B59164.w82-120.abo.wanadoo.fr',
+'to': '#HereIsTheTestChannel',
+'body': 'hello\r'}
+```  
+You can use the __split_new_raw(line)__ function this way:  
+```python
+from irc import IRC
+from split_raw_message import split_raw_message
+
+irc = IRC("irc.swiftirc.net", "#HereIsTheTestchannel", "TestBOT938")
+irc.connect()
+
+exit_trigger = False
+message = ""
+
+while not exit_trigger:
+
+    response = irc.get_response()
+
+    for line in response:
+
+        message = split_raw_message(line)
+
+        if message:
+            print(message)
+        else:
+            continue
+
+        # From this point, you have the headers and the body message
+
+        sender_nickname = message["sender_nickname"]
+
+        if message["body"].find("hello") == 0:
+            print("I see an hello!")
+            irc.send(f"Hello! {sender_nickname}\n")
+
+        if message["body"].find("disconnect") == 0:
+            print("I have to disconnect baby.")
+            irc.disconnect()
+            exit_trigger = True
+```  
+
 # Copyright (C)
 
 Copyright (C) 2021  cGIfl300 <cgifl300@cgifl300.com>
