@@ -26,10 +26,15 @@ class IRC:
         self.first_ping = True
         self.has_joined = False
         self.msg = ""
+        self.users_list = []
 
     def send(self, msg="No message"):
         # Send a message
         self.irc.send(bytes(f"PRIVMSG {self.channel} :{msg}\n", "UTF-8"))
+
+    def get_users_list(self):
+        # Get the users list
+        self.irc.send(bytes(f"WHO {self.channel}\n", "UTF-8"))
 
     def connect(self):
         # Connect to the server
