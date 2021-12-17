@@ -10,6 +10,8 @@ def split_raw_message(raw_message):
     body = raw_message[raw_message.find(":", 1) + 1 :]
 
     if "PRIVMSG" in headers:
+        if len(headers) < 3:
+            return None
         return {
             "type": "PRIVMSG",
             "headers": headers,
@@ -22,6 +24,8 @@ def split_raw_message(raw_message):
 
     if "352" in headers:
         headers = headers.split()
+        if len(headers) < 9:
+            return None
         return {
             "type": "352",
             "headers": headers,
