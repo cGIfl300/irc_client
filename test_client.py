@@ -17,7 +17,7 @@ while not exit_trigger:
 
         message = split_raw_message(line)
 
-        if message == None:
+        if message is None:
             continue
 
         # From this point, you have the headers and the body message
