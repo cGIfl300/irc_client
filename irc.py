@@ -4,12 +4,12 @@ import time
 
 class IRC:
     """A class to have an IRC Client
-    server (string): Server Name ("XXX.XXX.XXX.XXX") # Can be an IP or an
+    server (string): Server Name ("XXX.XXX.XXX.XXX") # Can be an IP or a
     hostname
     port (int): 6667 by default, the port to connect to
     channel (string): channel name must start by # or ! or &
     botnick (string): the bot's nickname
-    botnickpass (string): the bot's password, we use nickaserv, set to None if
+    botnickpass (string): the bot's password, we use nickserv, set to None if
     None
     """
 
@@ -63,10 +63,10 @@ class IRC:
         self.irc.send(bytes(f"JOIN {self.channel}\n", "UTF-8"))
 
     def disconnect(
-        self, msg="Powered by https://github.com/cGIfl300/irc_client"
+            self, msg="Powered by https://github.com/cGIfl300/irc_client"
     ):
         """Disconnect the bot
-        msg (string): Optionnal, the bot message
+        msg (string): Optional, the bot message
         """
         self.irc.send(bytes(f"QUIT {msg}\n", "UTF-8"))
         self.irc.close()
@@ -82,7 +82,7 @@ class IRC:
         for resp in response:
             if resp.find("PING") == 0:
                 self.irc.send(
-                    bytes("PONG " + resp[resp.find("PING") + 5 :], "UTF-8")
+                    bytes("PONG " + resp[resp.find("PING") + 5:], "UTF-8")
                 )
                 if self.first_ping:
                     self.first_ping = False

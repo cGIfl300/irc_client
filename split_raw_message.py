@@ -1,13 +1,13 @@
 def split_raw_message(raw_message):
-    """Split a raw message (ie.:
+    """Split a raw message (i.e.:
     :cGIfl301!~dragonfly@Swift-12B59164.w82-120.abo.wanadoo.fr
     PRIVMSG #HereIsTheTestChannel :hello)
     into an understandable object
     Restricted to PRIVMSG
     """
     # Split headers from body
-    headers = raw_message[1 : raw_message.find(":", 1) - 1]
-    body = raw_message[raw_message.find(":", 1) + 1 :]
+    headers = raw_message[1: raw_message.find(":", 1) - 1]
+    body = raw_message[raw_message.find(":", 1) + 1:]
 
     if "PRIVMSG" in headers:
         if len(headers) < 3:
