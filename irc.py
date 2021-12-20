@@ -4,7 +4,7 @@ import time
 
 class IRC:
     """A class to have an IRC Client
-    server (string): Server Name ("XXX.XXX.XXX.XXX") # Can be an IP or a
+    server (string): Server Name ("XXX.XXX.XXX.XXX") # Can be an IP or an
     hostname
     port (int): 6667 by default, the port to connect to
     channel (string): channel name must start by # or ! or &
@@ -52,19 +52,16 @@ class IRC:
         self.irc.send(bytes(f"NICK {self.botnick}\n", "UTF-8"))
         if self.botnickpass:
             self.irc.send(
-                bytes(f"NICKSERV IDENTIFY {self.botnickpass}\n", "UTF-8")
-            )
-
-        time.sleep(5)
-        self.join()
+                bytes(f"NICKSERV IDENTIFY {self.botnickpass}\n", "UTF-8"))
 
     def join(self):
         # Join the channel
+        print("Joining")
+        self.has_joined = True
         self.irc.send(bytes(f"JOIN {self.channel}\n", "UTF-8"))
 
-    def disconnect(
-            self, msg="Powered by https://github.com/cGIfl300/irc_client"
-    ):
+    def disconnect(self,
+                   msg="Powered by https://github.com/cGIfl300/irc_client"):
         """Disconnect the bot
         msg (string): Optional, the bot message
         """
@@ -74,21 +71,32 @@ class IRC:
     def get_response(self):
         time.sleep(1)
         # Get the response
-        response = self.irc.recv(2040).decode("UTF-8")
+        response = self.irc.recv(4048).decode("UTF-8")
 
         response = response.strip("\r")
         response = response.split("\n")
 
+        for line in response:
+            if not line:
+                continue
+
+            if len(line) < 2:
+                continue
+
+            if line[0] == ":":
+                line = line.split(":")
+
+                if len(line) < 2:
+                    continue
+
+                line = line[1].split(" ")
+                if line[1] == "001":
+                    self.join()
+
+        # print(response)
+
         for resp in response:
             if resp.find("PING") == 0:
                 self.irc.send(
-                    bytes("PONG " + resp[resp.find("PING") + 5:], "UTF-8")
-                )
-                if self.first_ping:
-                    self.first_ping = False
-                    return response
-                if not self.has_joined:
-                    # Only connect at the second ping, this delay prevent
-                    # from been baned
-                    self.join()
+                    bytes("PONG " + resp[resp.find("PING") + 5:], "UTF-8"))
         return response
