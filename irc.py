@@ -68,6 +68,12 @@ class IRC:
         self.irc.send(bytes(f"QUIT {msg}\n", "UTF-8"))
         self.irc.close()
 
+    def is_registered(self, nickname):
+        """ Switch the registered status to a nickname """
+        for user in self.users_list:
+            if user["nickname"] == nickname:
+                user["is_registered"] = True
+
     def get_response(self):
         time.sleep(1)
         # Get the response
@@ -90,6 +96,10 @@ class IRC:
                     continue
 
                 line = line[1].split(" ")
+
+                if len(line) < 2:
+                    continue
+
                 if line[1] == "001":
                     self.join()
 

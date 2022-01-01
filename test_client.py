@@ -1,13 +1,14 @@
 from irc import IRC
 from split_raw_message import split_raw_message
 
-irc = IRC("irc.executingreality.com", "#test9302", "bot_name")
+irc = IRC("server", "#channel", "bot_name")
 irc.connect()
 
 exit_trigger = False
 message = ""
 fortune = ""
-secure_nick = "cGIfl300"
+secure_nick = "cGIfl301"
+tmp_nickname = ""
 
 while not exit_trigger:
 
@@ -23,6 +24,11 @@ while not exit_trigger:
 
         if message["type"] == "352":
             irc.users_list.append(message)
+            tmp_nickname = message["nickname"]
+            irc.irc.send(bytes(f"WHOIS {tmp_nickname}\n", "UTF-8"))
+
+        if message["type"] == "307":
+            irc.is_registered(message["nickname"])
 
         if message["type"] == "315":
             print("Users list completed.")

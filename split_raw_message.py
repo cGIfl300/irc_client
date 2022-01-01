@@ -22,6 +22,7 @@ def split_raw_message(raw_message):
             "body": body,
         }
 
+    # Whois
     if "352" in headers:
         headers = headers.split()
         if len(headers) < 9:
@@ -37,6 +38,19 @@ def split_raw_message(raw_message):
             "hostname": headers[5],
             "nickname": headers[7],
             "tokens": headers[8],
+            "is_registered": False,
             "description": body,
+        }
+
+    # Is a registered nick
+    if "307" in headers:
+        headers = headers.split()
+        if len(headers) < 4:
+            return None
+        return {
+            "type": "307",
+            "headers": headers,
+            "body": body,
+            "nickname": headers[3],
         }
     return None
