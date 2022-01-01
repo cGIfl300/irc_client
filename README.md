@@ -53,6 +53,7 @@ return {
     "hostname": headers[5],  # user's hostname
     "nickname": headers[7],  # user's nickname
     "tokens": headers[8],  # user's token
+    "is_registered": False, # is the user registered
     "description": body,  # user's description
 }
 ```
