@@ -122,7 +122,7 @@ while not exit_trigger:
 
 # Copyright (C)
 
-Copyright (C) 2021 cGIfl300 <cgifl300@cgifl300.com>
+Copyright (C) 2021 - 2022 cGIfl300 <cgifl300@cgifl300.com>
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
